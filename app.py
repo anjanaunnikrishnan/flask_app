@@ -1,17 +1,15 @@
 from flask import Flask, render_template
 from pymongo import MongoClient
 import os
-from dotenv import load_dotenv #loaded .env
+from dotenv import load_dotenv  # Loaded .env file
 
 load_dotenv()
 
 app = Flask(__name__)
 
-# Connecting to MongoDB Atlas
-MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
-# Password protected using env file
-MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
-client = MongoClient("mongodb+srv://"+MONGODB_USERNAME+":"+MONGODB_PASSWORD+"@ecommerce.xvlyp.mongodb.net/?retryWrites=true&w=majority&appName=Ecommerce")
+# Connecting to MongoDB Atlas using MONGO_URI from .env or GitHub Secrets
+MONGO_URI = os.getenv("MONGO_URI")
+client = MongoClient(MONGO_URI)
 db = client.shop_db
 products_collection = db.products
 
@@ -28,4 +26,3 @@ def products():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
