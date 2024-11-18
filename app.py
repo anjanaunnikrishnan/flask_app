@@ -7,9 +7,11 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# Connecting to MongoDB Atlas using MONGO_URI from .env or GitHub Secrets
-MONGO_URI = os.getenv("MONGO_URI")
-client = MongoClient(MONGO_URI)
+# Connecting to MongoDB Atlas
+MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
+# Password protected using env file
+MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
+client = MongoClient("mongodb+srv://"+MONGODB_USERNAME+":"+MONGODB_PASSWORD+"@ecommerce.xvlyp.mongodb.net/?retryWrites=true&w=majority&appName=Ecommerce")
 db = client.shop_db
 products_collection = db.products
 
