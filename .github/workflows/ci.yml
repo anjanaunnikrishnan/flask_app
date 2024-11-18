@@ -26,9 +26,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    - name: Set up MongoDB Atlas URI
-      run: echo "MONGO_URI=mongodb+srv://<db_username>:<db_password>@ecommerce.xvlyp.mongodb.net/?retryWrites=true&w=majority&appName=Ecommerce" >> $GITHUB_ENV
-      
+    - name: Set up MongoDB URI from GitHub Secrets
+      run: echo "MONGO_URI=mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@ecommerce.xvlyp.mongodb.net/?retryWrites=true&w=majority&appName=Ecommerce" >> $GITHUB_ENV
+
     - name: Run Unit Tests
       run: |
         python -m unittest discover tests/
