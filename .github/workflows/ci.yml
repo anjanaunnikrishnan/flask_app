@@ -26,11 +26,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    - name: Install MongoDB
-      run: |
-        sudo apt-get install -y mongodb
-        sudo systemctl start mongodb
-
+    - name: Set up MongoDB Atlas URI
+      run: echo "MONGO_URI=mongodb+srv://<db_username>:<db_password>@ecommerce.xvlyp.mongodb.net/?retryWrites=true&w=majority&appName=Ecommerce" >> $GITHUB_ENV
+      
     - name: Run Unit Tests
       run: |
         python -m unittest discover tests/
