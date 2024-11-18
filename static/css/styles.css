@@ -1,0 +1,45 @@
+body {
+    padding-top: 50px;
+    background-color: beige;
+
+}
+
+/*tried fadeout animation for H1*/
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+h1 {
+    color: #007bff;
+    text-align: center;
+    animation: fadeIn 2s ease-in-out;
+
+}
+/*tried left rolling animation for both h1 and p*/
+@keyframes rollInFromLeft {
+    0% {
+        transform: translateX(-100%) rotate(-360deg);
+        opacity: 0; /* Invisible at the start */
+    }
+    100% {
+        transform: translateX(0) rotate(0deg);
+        opacity: 1; /* Fully visible at the end */
+    }
+}
+h2 {
+    font-size: 3em;
+    text-align: center;
+    color: #333;
+    animation: rollInFromLeft 2s ease-out;
+}
+
+p {
+    font-size: 1em;
+    text-align: center;
+    color: #333;
+    animation: rollInFromLeft 2s ease-out;
+}
