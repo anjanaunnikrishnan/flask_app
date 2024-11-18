@@ -11,24 +11,26 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.8'
-    
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    
-    - name: Set up MongoDB URI from GitHub Secrets
-      run: echo "MONGO_URI=mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@ecommerce.xvlyp.mongodb.net/?retryWrites=true&w=majority&appName=Ecommerce" >> $GITHUB_ENV
 
-    - name: Run Unit Tests
+    - name: Set up MongoDB URI from GitHub Secrets
       run: |
-        python -m unittest discover tests/
+        echo "MONGO_URI=mongodb+srv://${{ secrets.MONGODB_USERNAME }}:${{ secrets.MONGODB_PASSWORD }}@ecommerce.xvlyp.mongodb.net/?retryWrites=true&w=majority&appName=Ecommerce" >> $GITHUB_ENV
+
+    - name: Run Unit Tests with pytest
+      run: |
+        echo "MongoDB URI is set in the environment."
+        pytest --maxfail=1 --disable-warnings -q
